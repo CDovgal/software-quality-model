@@ -17,6 +17,8 @@ include_directories(
     src
 )
 
+include(D:/soft/dlib-18.15/dlib/cmake)
+
 #http://cmake.3232098.n2.nabble.com/AUTOMOC-feature-skips-sources-of-executable-targets-td7584290.html
 # headers
 file(
@@ -55,6 +57,11 @@ add_executable(
     ${EXECUTABLE_NAME}
     WIN32
     ${SQM_sources} ${SQM_uis} ${SQM_resources_headers} ${SQM_headers} ${SQM_icon}
+)
+
+target_link_libraries(
+	${EXECUTABLE_NAME}
+	dlib
 )
 
 # Create dependencies
