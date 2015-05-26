@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/SQM">
+    <file>app.ico</file>
+    <file>data-analyzing-32.png</file>
+    <file>window-32.png</file>
+  </qresource>
+</RCC>
