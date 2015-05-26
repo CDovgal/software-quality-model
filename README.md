@@ -10,8 +10,8 @@ How to build 'Software quality model' client
 - $ make
 - Install CMake 3.0 or higher
 - Create bin directory in the root of a project and run (example contains mock for path to qt):
-- $ cmake .. -DCMAKE_PREFIX_PATH="D:/qt5"                            # for Mac OS X, Linux
-- $ cmake .. -DCMAKE_PREFIX_PATH="D:/qt5" -G"Visual Studio 12 Win64" # for Windows
+- $ cmake .. -DCMAKE_PREFIX_PATH="~/third_party/qt5/qtbase"                 # for Mac OS X, Linux
+- $ cmake .. -DCMAKE_PREFIX_PATH="D:/qt5/qtbase" -G"Visual Studio 12 Win64" # for Windows
 - Open quality-software-model.sln;
 - Select Release configuration for the whole solution;
 - Run INSTALL project.
