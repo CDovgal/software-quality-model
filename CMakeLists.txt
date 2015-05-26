@@ -5,6 +5,9 @@ project(software_quality_model)
 set(EXECUTABLE_NAME software_quality_model)
 
 message(STATUS ${CMAKE_PREFIX_PATH})
+message(STATUS ${DLIB_PATH})
+
+include(${DLIB_PATH}/dlib/cmake)
 
 set(QT_USE_QTMAIN TRUE)
 
@@ -16,8 +19,6 @@ find_package(Qt5Widgets REQUIRED)
 include_directories(
     src
 )
-
-include(D:/soft/dlib-18.15/dlib/cmake)
 
 #http://cmake.3232098.n2.nabble.com/AUTOMOC-feature-skips-sources-of-executable-targets-td7584290.html
 # headers
