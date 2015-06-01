@@ -5,9 +5,6 @@ project(software_quality_model)
 set(EXECUTABLE_NAME software_quality_model)
 
 message(STATUS ${CMAKE_PREFIX_PATH})
-message(STATUS ${DLIB_PATH})
-
-include(${DLIB_PATH}/dlib/cmake)
 
 set(QT_USE_QTMAIN TRUE)
 
@@ -18,6 +15,11 @@ find_package(Qt5Widgets REQUIRED)
 
 include_directories(
     src
+    ${CMAKE_CURRENT_SOURCE_DIR}/Netica_API_504/src
+)
+
+link_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/Netica_API_504/lib
 )
 
 #http://cmake.3232098.n2.nabble.com/AUTOMOC-feature-skips-sources-of-executable-targets-td7584290.html
@@ -62,7 +64,7 @@ add_executable(
 
 target_link_libraries(
 	${EXECUTABLE_NAME}
-	dlib
+	netica
 )
 
 # Create dependencies
