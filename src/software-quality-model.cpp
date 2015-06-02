@@ -21,7 +21,6 @@ SQM_client::SQM_client(QWidget* ip_parent)
 {
     mp_ui->setupUi(this);
     environ_ns* env = NewNeticaEnviron_ns (NULL, NULL, NULL);
-
 }
 
 SQM_client::~SQM_client()
