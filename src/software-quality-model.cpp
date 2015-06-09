@@ -75,6 +75,38 @@ int SQM_client::cyclomatic_complexity()
     return 2;
 }
 
+int SQM_client::comment_ratio()
+{
+    if (mp_ui->mp_comment_ratio->value() > 0.4)
+      return 0;
+  
+    if (mp_ui->mp_comment_ratio->value() > 0.1)
+      return 1;
+  
+    return 2;
+}
+
+int SQM_client::coupling()
+{
+    if (mp_ui->mp_coupling->value() > 0.8)
+      return 0;
+  
+    if (mp_ui->mp_coupling->value() > 0.65)
+      return 1;
+  
+    return 2;
+}
+
+int SQM_client::cohesion()
+{
+    if (mp_ui->mp_LCOM4->value() > 5)
+      return 0;
+  
+    if (mp_ui->mp_LCOM4->value() > 3)
+      return 1;
+  
+    return 2;
+}
 
 void SQM_client::build_network()
 {

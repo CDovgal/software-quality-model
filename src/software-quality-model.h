@@ -31,6 +31,9 @@ public:
     int average_module_size();
     int code_coverage();
     int cyclomatic_complexity();
+    int comment_ratio();
+    int coupling();
+    int cohesion();
   
 private:
     std::shared_ptr<Ui::SQM_client> mp_ui;
