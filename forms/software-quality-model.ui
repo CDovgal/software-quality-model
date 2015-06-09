@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>555</height>
+    <width>824</width>
+    <height>449</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Software quality model</string>
+   <string>Оцінка якості програнмого забезпечення</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/images/resources.qrc">
@@ -24,14 +24,14 @@
    <widget class="QPushButton" name="mp_button_calculate">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>400</y>
+      <x>580</x>
+      <y>10</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Calculate</string>
+     <string>Обчислити</string>
     </property>
    </widget>
    <widget class="QWidget" name="widget" native="true">
@@ -47,17 +47,177 @@
      <string notr="true">background-image: url(:/SQM/topology.png);</string>
     </property>
    </widget>
-   <widget class="QLabel" name="mp_result">
+   <widget class="QPlainTextEdit" name="mp_results">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>60</y>
-      <width>121</width>
+      <x>580</x>
+      <y>70</y>
+      <width>251</width>
       <height>61</height>
      </rect>
     </property>
+    <property name="plainText">
+     <string>Низької якості:
+Середньої якості:
+Високої якості:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_LCOM4">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>190</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>10.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_coupling">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>240</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.500000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_comment_ratio">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>290</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.500000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_cyclomatic">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>390</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_code_coverage">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>390</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>0.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.250000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_average_size">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>390</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>0.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100000.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>100.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="mp_dsqi">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>0.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.050000000000000</double>
+    </property>
+    <property name="value">
+     <double>0.500000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>50</y>
+      <width>241</width>
+      <height>16</height>
+     </rect>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>Ймовірність, що програмне забезпечення є</string>
     </property>
    </widget>
   </widget>
@@ -66,7 +226,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>730</width>
+     <width>824</width>
      <height>21</height>
     </rect>
    </property>

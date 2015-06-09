@@ -26,6 +26,9 @@ public:
     ~SQM_client();
 
     void build_network();
+
+    int dsqi();
+    int average_module_size();
   
 private:
     std::shared_ptr<Ui::SQM_client> mp_ui;
