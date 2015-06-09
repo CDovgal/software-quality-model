@@ -43,7 +43,14 @@ int SQM_client::dsqi()
 
 int SQM_client::average_module_size()
 {
-    return 0;
+    if (mp_ui->mp_average_size->value() < 100 || mp_ui->mp_average_size->value() > 1600)
+        return 0;
+
+    if (mp_ui->mp_average_size->value() > 600)
+        return 1;
+
+    return 2;
+
 }
 
 void SQM_client::build_network()
@@ -62,7 +69,7 @@ void SQM_client::build_network()
         //Implementation,
         Understanding,
         Design,
-        //CodeReading,
+        CodeReading,
         //Testing,
         //Modification,
         I_DesignQuality,
@@ -81,17 +88,17 @@ void SQM_client::build_network()
     // The first thing we do is tell the bn object how many nodes it has
     // and also add the three edges.  Again, we are using the network
     // shown in ASCII art at the top of this file.
-    bn.set_number_of_nodes(5);
+    bn.set_number_of_nodes(7);
 
 
     // add_edge - from, to
     bn.add_edge(Analysis, Maintenance);       //                                            bn.add_edge(QA, Maintenance);                  bn.add_edge(Implementation, Maintenance);
     bn.add_edge(Understanding, Analysis);
 
-    bn.add_edge(Design, Understanding);     //bn.add_edge(CodeReading, Understanding);  //    bn.add_edge(Testing, QA);                      bn.add_edge(Modification, Implementation);
+    bn.add_edge(Design, Understanding);     bn.add_edge(CodeReading, Understanding);  //    bn.add_edge(Testing, QA);                      bn.add_edge(Modification, Implementation);
     
 
-    bn.add_edge(I_DesignQuality, Design);   // bn.add_edge(I_ModuleSize, CodeReading);       bn.add_edge(I_ImplementationAccuracy, Testing);  bn.add_edge(I_Cohesion, Modification);
+    bn.add_edge(I_DesignQuality, Design);    bn.add_edge(I_ModuleSize, CodeReading);   //    bn.add_edge(I_ImplementationAccuracy, Testing);  bn.add_edge(I_Cohesion, Modification);
      /*************************************************************************************///bn.add_edge(I_CodeCoverage, Testing);            bn.add_edge(I_Coupling, Modification);
      /**************************************************************************************************************************************///bn.add_edge(I_CommentRatio, Modification);;;;;;;;;;;;;
 
@@ -99,7 +106,7 @@ void SQM_client::build_network()
     // Now we inform all the nodes in the network that they are binary
     // nodes.  That is, they only have two possible values.
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 7; ++i)
     {
         set_node_num_values(bn, i, 3);
     }
@@ -114,14 +121,16 @@ void SQM_client::build_network()
     // Here we specify that p(B=1) = 0.01
     // parent_state is empty in this case since B is a root node.
 
+
+    // init indicators
     set_node_probability(bn, I_DesignQuality, 2, parent_state, 0.1);
     set_node_probability(bn, I_DesignQuality, 1, parent_state, 0.15);
     set_node_probability(bn, I_DesignQuality, 0, parent_state, 0.75);
 
 
-    //set_node_probability(bn, I_ModuleSize, 2, parent_state, 1. - 2. / 3);
-    //set_node_probability(bn, I_ModuleSize, 1, parent_state, 1. / 3);
-    //set_node_probability(bn, I_ModuleSize, 0, parent_state, 1. / 3);
+    set_node_probability(bn, I_ModuleSize, 2, parent_state, 0.4);
+    set_node_probability(bn, I_ModuleSize, 1, parent_state, 0.3);
+    set_node_probability(bn, I_ModuleSize, 0, parent_state, 0.3);
 
 
     //set_node_probability(bn, I_ImplementationAccuracy, 2, parent_state, 1. - 2. / 3);
@@ -152,9 +161,7 @@ void SQM_client::build_network()
 
 
 
-
-    // This is our first node that has parents. So we set the parent_state
-    // object to reflect that A has both B and C as parents.
+    ///      Design ==>  I_DesignQuality
     parent_state.add(I_DesignQuality, 2);
     set_node_probability(bn, Design, 2, parent_state, 0.8);
     set_node_probability(bn, Design, 1, parent_state, 0.15);
@@ -169,27 +176,92 @@ void SQM_client::build_network()
     set_node_probability(bn, Design, 2, parent_state, 0.1);
     set_node_probability(bn, Design, 1, parent_state, 0.8);
     set_node_probability(bn, Design, 0, parent_state, 0.1);
+    /////////////////////////////////////////////////////
 
 
-
+    ///      CodeReading ==>  I_ModuleSize 
     parent_state.clear();
+    parent_state.add(I_ModuleSize, 2);
+    set_node_probability(bn, CodeReading, 2, parent_state, 0.4);
+    set_node_probability(bn, CodeReading, 1, parent_state, 0.3);
+    set_node_probability(bn, CodeReading, 0, parent_state, 0.3);
+
+    parent_state[I_ModuleSize] = 1;
+    set_node_probability(bn, CodeReading, 2, parent_state, 0.3);
+    set_node_probability(bn, CodeReading, 1, parent_state, 0.4);
+    set_node_probability(bn, CodeReading, 0, parent_state, 0.3);
+
+    parent_state[I_ModuleSize] = 0;
+    set_node_probability(bn, CodeReading, 2, parent_state, 0.3);
+    set_node_probability(bn, CodeReading, 1, parent_state, 0.3);
+    set_node_probability(bn, CodeReading, 0, parent_state, 0.4);
+    /////////////////////////////////////////////////////
+
+ 
+    ///      Design     ==>  
+    ///                         Understanding
+    ///      CodeReading ==>  
+    parent_state.clear();
+    // (2,2)
     parent_state.add(Design, 2);
-    set_node_probability(bn, Understanding, 2, parent_state, 0.8);
-    set_node_probability(bn, Understanding, 1, parent_state, 0.15);
-    set_node_probability(bn, Understanding, 0, parent_state, 0.05);
+    parent_state.add(CodeReading, 2);
+    set_node_probability(bn, Understanding, 2, parent_state, 0.98);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.01);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.01);
 
-
+    // (1, 2)
     parent_state[Design] = 1;
-    set_node_probability(bn, Understanding, 2, parent_state, 0.2);
-    set_node_probability(bn, Understanding, 1, parent_state, 0.6);
+    set_node_probability(bn, Understanding, 2, parent_state, 0.8);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.19);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.01);
+
+    // (1, 1)
+    parent_state[CodeReading] = 1;
+    set_node_probability(bn, Understanding, 2, parent_state, 0.7);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.19);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.11);
+
+    // (2, 1)
+    parent_state[Design] = 2;
+    set_node_probability(bn, Understanding, 2, parent_state, 0.95);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.04);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.01);
+
+    // (2, 0)
+    parent_state[CodeReading] = 0;
+    set_node_probability(bn, Understanding, 2, parent_state, 0.5);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.3);
     set_node_probability(bn, Understanding, 0, parent_state, 0.2);
 
+    // (1, 0)
+    parent_state[Design] = 1;
+    set_node_probability(bn, Understanding, 2, parent_state, 0.3);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.6);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.1);
+
+    // (0, 0)
     parent_state[Design] = 0;
     set_node_probability(bn, Understanding, 2, parent_state, 0.1);
-    set_node_probability(bn, Understanding, 1, parent_state, 0.4);
-    set_node_probability(bn, Understanding, 0, parent_state, 0.5);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.1);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.8);
+
+    // (0, 1)
+    parent_state[CodeReading] = 1;
+    set_node_probability(bn, Understanding, 2, parent_state, 0.15);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.5);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.35);
+
+    // (0, 1)
+    parent_state[CodeReading] = 2;
+    set_node_probability(bn, Understanding, 2, parent_state, 0.3);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.3);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.4);
+    /////////////////////////
+
+    
 
 
+    ///      Understanding ==>  Analysis
     parent_state.clear();
     parent_state.add(Understanding, 2);
     set_node_probability(bn, Analysis, 2, parent_state, 0.75);
@@ -205,8 +277,10 @@ void SQM_client::build_network()
     set_node_probability(bn, Analysis, 2, parent_state, 0.1);
     set_node_probability(bn, Analysis, 1, parent_state, 0.3);
     set_node_probability(bn, Analysis, 0, parent_state, 0.6);
+    ////////////////////////////////
 
 
+    ///      Analysis ==>  Maintenance
     parent_state.clear();
     parent_state.add(Analysis, 2);
     set_node_probability(bn, Maintenance, 2, parent_state, 0.9);
@@ -266,6 +340,9 @@ void SQM_client::build_network()
     // calls.
     set_node_value(bn, I_DesignQuality, dsqi());
     set_node_as_evidence(bn, I_DesignQuality);
+
+    set_node_value(bn, I_ModuleSize, average_module_size());
+    set_node_as_evidence(bn, I_ModuleSize);
 
     // Now we want to compute the probabilities of all the nodes in the network again
     // given that we now know that C is 1.  We can do this as follows:
