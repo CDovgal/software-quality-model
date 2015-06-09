@@ -711,7 +711,7 @@ void SQM_client::build_network()
     //set_node_value(bn, D, 0);
 
     // We will leave the C node with a value of 1 and keep it as an evidence node.  
-
+/*
 
     // First create an instance of the gibbs sampler object
     bayesian_network_gibbs_sampler sampler;
@@ -753,7 +753,7 @@ void SQM_client::build_network()
     //cout << "p(Maintanence = middle) = " << (double)count_Maintenance_middle / (double)rounds << endl;
     //cout << "p(Maintanence = low) = " << (double)count_Maintenance_low / (double)rounds << endl;
 
-
+*/
     auto end = std::chrono::system_clock::now();
 
     cout << std::chrono::duration<double>(end - start).count() << endl;
