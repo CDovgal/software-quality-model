@@ -30,6 +30,22 @@ SQM_client::SQM_client(QWidget* ip_parent)
 SQM_client::~SQM_client()
 {}
 
+int SQM_client::dsqi()
+{
+    if (mp_ui->mp_dsqi->value() <= 0.75)
+        return 0;
+
+    if (mp_ui->mp_dsqi->value() <= 0.9)
+        return 1;
+
+    return 2;
+}
+
+int SQM_client::average_module_size()
+{
+    return 0;
+}
+
 void SQM_client::build_network()
 {
     using namespace dlib;
@@ -98,9 +114,9 @@ void SQM_client::build_network()
     // Here we specify that p(B=1) = 0.01
     // parent_state is empty in this case since B is a root node.
 
-    set_node_probability(bn, I_DesignQuality, 2, parent_state, 0.3);
-    set_node_probability(bn, I_DesignQuality, 1, parent_state, 0.3);
-    set_node_probability(bn, I_DesignQuality, 0, parent_state, 0.4);
+    set_node_probability(bn, I_DesignQuality, 2, parent_state, 0.1);
+    set_node_probability(bn, I_DesignQuality, 1, parent_state, 0.15);
+    set_node_probability(bn, I_DesignQuality, 0, parent_state, 0.75);
 
 
     //set_node_probability(bn, I_ModuleSize, 2, parent_state, 1. - 2. / 3);
@@ -140,72 +156,72 @@ void SQM_client::build_network()
     // This is our first node that has parents. So we set the parent_state
     // object to reflect that A has both B and C as parents.
     parent_state.add(I_DesignQuality, 2);
-    set_node_probability(bn, Design, 2, parent_state, 0.4);
-    set_node_probability(bn, Design, 1, parent_state, 0.4);
-    set_node_probability(bn, Design, 0, parent_state, 0.2);
+    set_node_probability(bn, Design, 2, parent_state, 0.8);
+    set_node_probability(bn, Design, 1, parent_state, 0.15);
+    set_node_probability(bn, Design, 0, parent_state, 0.05);
 
     parent_state[I_DesignQuality] = 1;
-    set_node_probability(bn, Design, 2, parent_state, 0.2);
-    set_node_probability(bn, Design, 1, parent_state, 0.2);
-    set_node_probability(bn, Design, 0, parent_state, 0.6);
+    set_node_probability(bn, Design, 2, parent_state, 0.5);
+    set_node_probability(bn, Design, 1, parent_state, 0.3);
+    set_node_probability(bn, Design, 0, parent_state, 0.2);
 
     parent_state[I_DesignQuality] = 0;
-    set_node_probability(bn, Design, 2, parent_state, 0.3);
-    set_node_probability(bn, Design, 1, parent_state, 0.3);
-    set_node_probability(bn, Design, 0, parent_state, 0.4);
+    set_node_probability(bn, Design, 2, parent_state, 0.1);
+    set_node_probability(bn, Design, 1, parent_state, 0.8);
+    set_node_probability(bn, Design, 0, parent_state, 0.1);
 
 
 
     parent_state.clear();
     parent_state.add(Design, 2);
-    set_node_probability(bn, Understanding, 2, parent_state, 0.3);
-    set_node_probability(bn, Understanding, 1, parent_state, 0.3);
-    set_node_probability(bn, Understanding, 0, parent_state, 0.4);
+    set_node_probability(bn, Understanding, 2, parent_state, 0.8);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.15);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.05);
 
 
     parent_state[Design] = 1;
-    set_node_probability(bn, Understanding, 2, parent_state, 0.3);
+    set_node_probability(bn, Understanding, 2, parent_state, 0.2);
     set_node_probability(bn, Understanding, 1, parent_state, 0.6);
-    set_node_probability(bn, Understanding, 0, parent_state, 0.1);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.2);
 
     parent_state[Design] = 0;
-    set_node_probability(bn, Understanding, 2, parent_state, 0.2);
-    set_node_probability(bn, Understanding, 1, parent_state, 0.3);
+    set_node_probability(bn, Understanding, 2, parent_state, 0.1);
+    set_node_probability(bn, Understanding, 1, parent_state, 0.4);
     set_node_probability(bn, Understanding, 0, parent_state, 0.5);
 
 
     parent_state.clear();
     parent_state.add(Understanding, 2);
-    set_node_probability(bn, Analysis, 2, parent_state, 0.1);
-    set_node_probability(bn, Analysis, 1, parent_state, 0.2);
-    set_node_probability(bn, Analysis, 0, parent_state, 0.7);
+    set_node_probability(bn, Analysis, 2, parent_state, 0.75);
+    set_node_probability(bn, Analysis, 1, parent_state, 0.15);
+    set_node_probability(bn, Analysis, 0, parent_state, 0.1);
 
     parent_state[Understanding] = 1;
-    set_node_probability(bn, Analysis, 2, parent_state, 0.1);
-    set_node_probability(bn, Analysis, 1, parent_state, 0.5);
-    set_node_probability(bn, Analysis, 0, parent_state, 0.4);
+    set_node_probability(bn, Analysis, 2, parent_state, 0.3);
+    set_node_probability(bn, Analysis, 1, parent_state, 0.4);
+    set_node_probability(bn, Analysis, 0, parent_state, 0.3);
 
     parent_state[Understanding] = 0;
-    set_node_probability(bn, Analysis, 2, parent_state, 0.6);
-    set_node_probability(bn, Analysis, 1, parent_state, 0.2);
-    set_node_probability(bn, Analysis, 0, parent_state, 0.2);
+    set_node_probability(bn, Analysis, 2, parent_state, 0.1);
+    set_node_probability(bn, Analysis, 1, parent_state, 0.3);
+    set_node_probability(bn, Analysis, 0, parent_state, 0.6);
 
 
     parent_state.clear();
     parent_state.add(Analysis, 2);
-    set_node_probability(bn, Maintenance, 2, parent_state, 0.6);
-    set_node_probability(bn, Maintenance, 1, parent_state, 0.2);
-    set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.9);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.09);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.01);
 
     parent_state[Analysis] = 1;
-    set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-    set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-    set_node_probability(bn, Maintenance, 0, parent_state, 0.4);
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
 
     parent_state[Analysis] = 0;
     set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-    set_node_probability(bn, Maintenance, 1, parent_state, 0.1);
-    set_node_probability(bn, Maintenance, 0, parent_state, 0.8);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
 
     // We have now finished setting up our bayesian network.  So let's compute some 
     // probability values.  The first thing we will do is compute the prior probability
@@ -248,7 +264,7 @@ void SQM_client::build_network()
     // node really has a value of 1.  That is to say, we now have evidence that 
     // C is 1.  We can represent this in the network using the following two function
     // calls.
-    set_node_value(bn, I_DesignQuality, 1);
+    set_node_value(bn, I_DesignQuality, dsqi());
     set_node_as_evidence(bn, I_DesignQuality);
 
     // Now we want to compute the probabilities of all the nodes in the network again
@@ -257,10 +273,10 @@ void SQM_client::build_network()
 
     // now print out the probabilities for each node
     cout << "Using the join tree algorithm:\n";
-    mp_ui->mp_result->setText(
-        QString::number(solution_with_evidence.probability(Maintenance)(2)) + ";" +
-        QString::number(solution_with_evidence.probability(Maintenance)(1)) + ";" +
-        QString::number(solution_with_evidence.probability(Maintenance)(0)));
+    mp_ui->mp_results->setPlainText(
+        QString::fromStdWString(L"Низької якості:      ") + QString::number(100 * solution_with_evidence.probability(Maintenance)(0)) + " %\n" +
+        QString::fromStdWString(L"Середньої якості: ")    + QString::number(100 * solution_with_evidence.probability(Maintenance)(1)) + " %\n" +
+        QString::fromStdWString(L"Високої якості:      ") + QString::number(100 * solution_with_evidence.probability(Maintenance)(2)) + " %");
 
 
     // Note that when we made our solution_with_evidence object we reused our join_tree object.
