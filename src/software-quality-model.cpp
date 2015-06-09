@@ -53,6 +53,29 @@ int SQM_client::average_module_size()
 
 }
 
+int SQM_client::code_coverage()
+{
+    if (mp_ui->mp_code_coverage->value() < 0.1)
+        return 0;
+
+    if (mp_ui->mp_code_coverage->value() < 0.5)
+        return 1;
+
+    return 2;
+}
+
+int SQM_client::cyclomatic_complexity()
+{
+    if (mp_ui->mp_cyclomatic->value() > 12)
+        return 0;
+
+    if (mp_ui->mp_cyclomatic->value() > 6)
+        return 1;
+
+    return 2;
+}
+
+
 void SQM_client::build_network()
 {
     using namespace dlib;
@@ -65,22 +88,22 @@ void SQM_client::build_network()
     {
         Maintenance = 0,
         Analysis,
-        //QA,
+        QA,
         //Implementation,
         Understanding,
         Design,
         CodeReading,
-        //Testing,
+        Testing,
         //Modification,
         I_DesignQuality,
         I_ModuleSize,
         I_ImplementationAccuracy,
         I_CodeCoverage,
-        I_Cohesion,
-        I_Coupling,
-        I_CommentRatio,
+        //I_Cohesion,
+        //I_Coupling,
+        //I_CommentRatio,
 
-        NumberOfNodes = I_CommentRatio
+        NumberOfNodes = I_CodeCoverage
     };
 
     // The next few blocks of code setup our bayesian network.
@@ -88,25 +111,25 @@ void SQM_client::build_network()
     // The first thing we do is tell the bn object how many nodes it has
     // and also add the three edges.  Again, we are using the network
     // shown in ASCII art at the top of this file.
-    bn.set_number_of_nodes(7);
+    bn.set_number_of_nodes(11);
 
 
     // add_edge - from, to
-    bn.add_edge(Analysis, Maintenance);       //                                            bn.add_edge(QA, Maintenance);                  bn.add_edge(Implementation, Maintenance);
+    bn.add_edge(Analysis, Maintenance);                                                   bn.add_edge(QA, Maintenance);        //          bn.add_edge(Implementation, Maintenance);
     bn.add_edge(Understanding, Analysis);
 
-    bn.add_edge(Design, Understanding);     bn.add_edge(CodeReading, Understanding);  //    bn.add_edge(Testing, QA);                      bn.add_edge(Modification, Implementation);
+    bn.add_edge(Design, Understanding);     bn.add_edge(CodeReading, Understanding);        bn.add_edge(Testing, QA);      //                bn.add_edge(Modification, Implementation);
     
 
-    bn.add_edge(I_DesignQuality, Design);    bn.add_edge(I_ModuleSize, CodeReading);   //    bn.add_edge(I_ImplementationAccuracy, Testing);  bn.add_edge(I_Cohesion, Modification);
-     /*************************************************************************************///bn.add_edge(I_CodeCoverage, Testing);            bn.add_edge(I_Coupling, Modification);
+    bn.add_edge(I_DesignQuality, Design);    bn.add_edge(I_ModuleSize, CodeReading);         bn.add_edge(I_ImplementationAccuracy, Testing);//  bn.add_edge(I_Cohesion, Modification);
+     /*************************************************************************************/ bn.add_edge(I_CodeCoverage, Testing);          //  bn.add_edge(I_Coupling, Modification);
      /**************************************************************************************************************************************///bn.add_edge(I_CommentRatio, Modification);;;;;;;;;;;;;
 
 
     // Now we inform all the nodes in the network that they are binary
     // nodes.  That is, they only have two possible values.
 
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < 11; ++i)
     {
         set_node_num_values(bn, i, 3);
     }
@@ -133,15 +156,14 @@ void SQM_client::build_network()
     set_node_probability(bn, I_ModuleSize, 0, parent_state, 0.3);
 
 
-    //set_node_probability(bn, I_ImplementationAccuracy, 2, parent_state, 1. - 2. / 3);
-    //set_node_probability(bn, I_ImplementationAccuracy, 1, parent_state, 1. / 3);
-    //set_node_probability(bn, I_ImplementationAccuracy, 0, parent_state, 1. / 3);
+    set_node_probability(bn, I_ImplementationAccuracy, 2, parent_state, 0.5);
+    set_node_probability(bn, I_ImplementationAccuracy, 1, parent_state, 0.3);
+    set_node_probability(bn, I_ImplementationAccuracy, 0, parent_state, 0.2);
+  
 
-
-
-    //set_node_probability(bn, I_CodeCoverage, 2, parent_state, 1. - 2. / 3);
-    //set_node_probability(bn, I_CodeCoverage, 1, parent_state, 1. / 3);
-    //set_node_probability(bn, I_CodeCoverage, 0, parent_state, 1. / 3);
+    set_node_probability(bn, I_CodeCoverage, 2, parent_state, 0.9);
+    set_node_probability(bn, I_CodeCoverage, 1, parent_state, 0.05);
+    set_node_probability(bn, I_CodeCoverage, 0, parent_state, 0.05);
 
 
     //set_node_probability(bn, I_Coupling, 2, parent_state, 1. - 2. / 3);
@@ -258,6 +280,70 @@ void SQM_client::build_network()
     set_node_probability(bn, Understanding, 0, parent_state, 0.4);
     /////////////////////////
 
+
+
+
+    ///      I_ImplementationAccuracy     ==>  
+    ///                                         Testing
+    ///      I_CodeCoverage             ==>  
+    parent_state.clear();
+    // (2,2)
+    parent_state.add(I_ImplementationAccuracy, 2);
+    parent_state.add(I_CodeCoverage, 2);
+    set_node_probability(bn, Testing, 2, parent_state, 0.99);
+    set_node_probability(bn, Testing, 1, parent_state, 0.009);
+    set_node_probability(bn, Testing, 0, parent_state, 0.001);
+
+    // (1, 2)
+    parent_state[I_ImplementationAccuracy] = 1;
+    set_node_probability(bn, Testing, 2, parent_state, 0.8);
+    set_node_probability(bn, Testing, 1, parent_state, 0.19);
+    set_node_probability(bn, Testing, 0, parent_state, 0.01);
+
+    // (1, 1)
+    parent_state[I_CodeCoverage] = 1;
+    set_node_probability(bn, Testing, 2, parent_state, 0.7);
+    set_node_probability(bn, Testing, 1, parent_state, 0.19);
+    set_node_probability(bn, Testing, 0, parent_state, 0.11);
+
+    // (2, 1)
+    parent_state[I_ImplementationAccuracy] = 2;
+    set_node_probability(bn, Testing, 2, parent_state, 0.95);
+    set_node_probability(bn, Testing, 1, parent_state, 0.04);
+    set_node_probability(bn, Testing, 0, parent_state, 0.01);
+
+    // (2, 0)
+    parent_state[I_CodeCoverage] = 0;
+    set_node_probability(bn, Testing, 2, parent_state, 0.5);
+    set_node_probability(bn, Testing, 1, parent_state, 0.3);
+    set_node_probability(bn, Testing, 0, parent_state, 0.2);
+
+    // (1, 0)
+    parent_state[I_ImplementationAccuracy] = 1;
+    set_node_probability(bn, Testing, 2, parent_state, 0.3);
+    set_node_probability(bn, Testing, 1, parent_state, 0.6);
+    set_node_probability(bn, Testing, 0, parent_state, 0.1);
+
+    // (0, 0)
+    parent_state[I_ImplementationAccuracy] = 0;
+    set_node_probability(bn, Testing, 2, parent_state, 0.1);
+    set_node_probability(bn, Testing, 1, parent_state, 0.1);
+    set_node_probability(bn, Testing, 0, parent_state, 0.8);
+
+    // (0, 1)
+    parent_state[I_CodeCoverage] = 1;
+    set_node_probability(bn, Testing, 2, parent_state, 0.15);
+    set_node_probability(bn, Testing, 1, parent_state, 0.5);
+    set_node_probability(bn, Testing, 0, parent_state, 0.35);
+
+    // (0, 1)
+    parent_state[I_CodeCoverage] = 2;
+    set_node_probability(bn, Testing, 2, parent_state, 0.3);
+    set_node_probability(bn, Testing, 1, parent_state, 0.3);
+    set_node_probability(bn, Testing, 0, parent_state, 0.4);
+    /////////////////////////
+
+
     
 
 
@@ -280,22 +366,83 @@ void SQM_client::build_network()
     ////////////////////////////////
 
 
-    ///      Analysis ==>  Maintenance
+    ///      Testing ==>  QA
+    parent_state.clear();
+    parent_state.add(Testing, 2);
+    set_node_probability(bn, QA, 2, parent_state, 0.8);
+    set_node_probability(bn, QA, 1, parent_state, 0.1);
+    set_node_probability(bn, QA, 0, parent_state, 0.1);
+
+    parent_state[Testing] = 1;
+    set_node_probability(bn, QA, 2, parent_state, 0.2);
+    set_node_probability(bn, QA, 1, parent_state, 0.5);
+    set_node_probability(bn, QA, 0, parent_state, 0.3);
+
+    parent_state[Testing] = 0;
+    set_node_probability(bn, QA, 2, parent_state, 0.2);
+    set_node_probability(bn, QA, 1, parent_state, 0.3);
+    set_node_probability(bn, QA, 0, parent_state, 0.5);
+    ////////////////////////////////
+
+    ///      QA ==>  
+    ///                               Maintenance
+    ///      Analysis ==>  
     parent_state.clear();
     parent_state.add(Analysis, 2);
-    set_node_probability(bn, Maintenance, 2, parent_state, 0.9);
-    set_node_probability(bn, Maintenance, 1, parent_state, 0.09);
-    set_node_probability(bn, Maintenance, 0, parent_state, 0.01);
+    parent_state.add(QA, 2);
 
+    // (2,2)
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.99);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.005);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.005);
+
+    // (1,2)
     parent_state[Analysis] = 1;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.8);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.15);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.05);
+
+    // (0, 2)
+    parent_state[Analysis] = 0;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.6);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
+
+    // (0, 1)
+    parent_state[QA] = 1;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
+
+    // (0, 0)
+    parent_state[QA] = 0;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
+
+    // (1,0)
+    parent_state[Analysis] = 1;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
+
+    // (2,0)
+    parent_state[Analysis] = 2;
     set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
     set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
     set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
 
-    parent_state[Analysis] = 0;
-    set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-    set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
-    set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
+    // (2,1)
+    parent_state[QA] = 1;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
+
+    // (1,1)
+    parent_state[Analysis] = 1;
+    set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
+    set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+    set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
     // We have now finished setting up our bayesian network.  So let's compute some 
     // probability values.  The first thing we will do is compute the prior probability
@@ -343,6 +490,12 @@ void SQM_client::build_network()
 
     set_node_value(bn, I_ModuleSize, average_module_size());
     set_node_as_evidence(bn, I_ModuleSize);
+
+    set_node_value(bn, I_CodeCoverage, code_coverage());
+    set_node_as_evidence(bn, I_CodeCoverage);
+
+    set_node_value(bn, I_ImplementationAccuracy, cyclomatic_complexity());
+    set_node_as_evidence(bn, I_ImplementationAccuracy);
 
     // Now we want to compute the probabilities of all the nodes in the network again
     // given that we now know that C is 1.  We can do this as follows:

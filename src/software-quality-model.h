@@ -29,6 +29,8 @@ public:
 
     int dsqi();
     int average_module_size();
+    int code_coverage();
+    int cyclomatic_complexity();
   
 private:
     std::shared_ptr<Ui::SQM_client> mp_ui;
