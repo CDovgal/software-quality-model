@@ -4,7 +4,13 @@ cmake_policy(SET CMP0020 OLD)
 project(software_quality_model)
 set(EXECUTABLE_NAME software_quality_model)
 
+#add_subdirectory(lib)
+
 message(STATUS ${CMAKE_PREFIX_PATH})
+
+STRING(REPLACE "/EHsc" "/EHa" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+STRING(REPLACE "/RTC1" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /clr")
 
 set(QT_USE_QTMAIN TRUE)
 
@@ -15,6 +21,7 @@ find_package(Qt5Widgets REQUIRED)
 
 include_directories(
     src
+	lib/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Netica_API_504/src
 )
 
@@ -64,7 +71,7 @@ add_executable(
 
 target_link_libraries(
 	${EXECUTABLE_NAME}
-	netica
+#	bayeslib
 )
 
 # Create dependencies

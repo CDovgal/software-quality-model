@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QMessageBox>
 
+
 #ifdef _WINDOWS
 // This function is used as an entry point in case linker flag is set to /SUBSYSTEM:WINDOWS
 // Only for Windows platform

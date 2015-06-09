@@ -24,6 +24,8 @@ class SQM_client : public QMainWindow
 public:
     explicit SQM_client(QWidget* parent = nullptr);
     ~SQM_client();
+
+    void build_network(bool);
   
 private:
     std::shared_ptr<Ui::SQM_client> mp_ui;
