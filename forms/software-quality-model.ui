@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>730</width>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,18 +17,47 @@
    <iconset resource="../resources/images/resources.qrc">
     <normaloff>:/SQM/app.ico</normaloff>:/SQM/app.ico</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="mp_button_calculate">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>200</y>
+      <x>490</x>
+      <y>400</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Fine!</string>
+     <string>Calculate</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>574</width>
+      <height>385</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/SQM/topology.png);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mp_result">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>60</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
@@ -37,7 +66,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>730</width>
      <height>21</height>
     </rect>
    </property>

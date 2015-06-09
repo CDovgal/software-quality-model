@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/SQM">
+    <file>topology.png</file>
     <file>app.ico</file>
     <file>data-analyzing-32.png</file>
     <file>window-32.png</file>
