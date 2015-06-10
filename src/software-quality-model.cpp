@@ -26,6 +26,32 @@ SQM_client::SQM_client(QWidget* ip_parent)
 {
     mp_ui->setupUi(this);
     connect(mp_ui->mp_button_calculate, &QAbstractButton::pressed, this, &SQM_client::build_network);
+
+    connect(mp_ui->mp_button_doxygen, &QAbstractButton::pressed, [&] ()
+        {
+            mp_ui->mp_dsqi->setValue(0.9);
+            mp_ui->mp_average_size->setValue(150);
+            mp_ui->mp_code_coverage->setValue(0.75);
+            mp_ui->mp_cyclomatic->setValue(3.6);
+            mp_ui->mp_comment_ratio->setValue(0.09);
+            mp_ui->mp_coupling->setValue(0.5);
+            mp_ui->mp_LCOM4->setValue(0.9);
+            build_network();
+        });
+
+
+    connect(mp_ui->mp_button_activemq, &QAbstractButton::pressed, [&] ()
+        {
+            mp_ui->mp_dsqi->setValue(0.7);
+            mp_ui->mp_average_size->setValue(100);
+            mp_ui->mp_code_coverage->setValue(0.16);
+            mp_ui->mp_cyclomatic->setValue(17);
+            mp_ui->mp_comment_ratio->setValue(0.15);
+            mp_ui->mp_coupling->setValue(0.168);
+            mp_ui->mp_LCOM4->setValue(0.7);
+            build_network();
+        });
+    
 }
 
 SQM_client::~SQM_client()
@@ -192,9 +218,9 @@ void SQM_client::build_network()
     set_node_probability(bn, I_ImplementationAccuracy, 0, parent_state, 0.2);
   
 
-    set_node_probability(bn, I_CodeCoverage, 2, parent_state, 0.9);
-    set_node_probability(bn, I_CodeCoverage, 1, parent_state, 0.05);
-    set_node_probability(bn, I_CodeCoverage, 0, parent_state, 0.05);
+    set_node_probability(bn, I_CodeCoverage, 2, parent_state, 0.8);
+    set_node_probability(bn, I_CodeCoverage, 1, parent_state, 0.1);
+    set_node_probability(bn, I_CodeCoverage, 0, parent_state, 0.1);
 
 
     set_node_probability(bn, I_Coupling, 1, parent_state, 0.5);
@@ -346,9 +372,9 @@ void SQM_client::build_network()
 
     // (2, 0)
     parent_state[CodeReading] = 0;
-    set_node_probability(bn, Understanding, 2, parent_state, 0.5);
+    set_node_probability(bn, Understanding, 2, parent_state, 0.4);
     set_node_probability(bn, Understanding, 1, parent_state, 0.3);
-    set_node_probability(bn, Understanding, 0, parent_state, 0.2);
+    set_node_probability(bn, Understanding, 0, parent_state, 0.3);
 
     // (1, 0)
     parent_state[Design] = 1;
@@ -391,9 +417,9 @@ void SQM_client::build_network()
 
     // (1, 2)
     parent_state[I_ImplementationAccuracy] = 1;
-    set_node_probability(bn, Testing, 2, parent_state, 0.8);
-    set_node_probability(bn, Testing, 1, parent_state, 0.19);
-    set_node_probability(bn, Testing, 0, parent_state, 0.01);
+    set_node_probability(bn, Testing, 2, parent_state, 0.4);
+    set_node_probability(bn, Testing, 1, parent_state, 0.3);
+    set_node_probability(bn, Testing, 0, parent_state, 0.3);
 
     // (1, 1)
     parent_state[I_CodeCoverage] = 1;
@@ -409,15 +435,15 @@ void SQM_client::build_network()
 
     // (2, 0)
     parent_state[I_CodeCoverage] = 0;
-    set_node_probability(bn, Testing, 2, parent_state, 0.5);
-    set_node_probability(bn, Testing, 1, parent_state, 0.3);
-    set_node_probability(bn, Testing, 0, parent_state, 0.2);
+    set_node_probability(bn, Testing, 2, parent_state, 0.1);
+    set_node_probability(bn, Testing, 1, parent_state, 0.6);
+    set_node_probability(bn, Testing, 0, parent_state, 0.4);
 
     // (1, 0)
     parent_state[I_ImplementationAccuracy] = 1;
-    set_node_probability(bn, Testing, 2, parent_state, 0.3);
-    set_node_probability(bn, Testing, 1, parent_state, 0.6);
-    set_node_probability(bn, Testing, 0, parent_state, 0.1);
+    set_node_probability(bn, Testing, 2, parent_state, 0.2);
+    set_node_probability(bn, Testing, 1, parent_state, 0.5);
+    set_node_probability(bn, Testing, 0, parent_state, 0.3);
 
     // (0, 0)
     parent_state[I_ImplementationAccuracy] = 0;
@@ -470,13 +496,13 @@ void SQM_client::build_network()
 
     parent_state[Testing] = 1;
     set_node_probability(bn, QA, 2, parent_state, 0.2);
-    set_node_probability(bn, QA, 1, parent_state, 0.5);
-    set_node_probability(bn, QA, 0, parent_state, 0.3);
-
-    parent_state[Testing] = 0;
-    set_node_probability(bn, QA, 2, parent_state, 0.2);
     set_node_probability(bn, QA, 1, parent_state, 0.3);
     set_node_probability(bn, QA, 0, parent_state, 0.5);
+
+    parent_state[Testing] = 0;
+    set_node_probability(bn, QA, 2, parent_state, 0.1);
+    set_node_probability(bn, QA, 1, parent_state, 0.2);
+    set_node_probability(bn, QA, 0, parent_state, 0.7);
     ////////////////////////////////
 
     ///      QA ==>  

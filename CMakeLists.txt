@@ -4,6 +4,8 @@ cmake_policy(SET CMP0020 OLD)
 project(software_quality_model)
 set(EXECUTABLE_NAME software_quality_model)
 
+set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+
 message(STATUS ${CMAKE_PREFIX_PATH})
 message(STATUS ${DLIB_PATH})
 
