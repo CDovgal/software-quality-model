@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Оцінка якості програнмого забезпечення</string>
+   <string>Оцінка якості програмного забезпечення</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/images/resources.qrc">
@@ -246,6 +246,19 @@
      <string>Doxygen</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>340</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Тестові приклади:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -253,7 +266,7 @@
      <x>0</x>
      <y>0</y>
      <width>865</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
