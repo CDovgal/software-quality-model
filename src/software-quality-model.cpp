@@ -933,11 +933,14 @@ void SQM_client::build_network()
         bayesian_network_join_tree solution_with_evidence(bn, join_tree);
 
         // now print out the probabilities for each node
+        double v0 = floorf(100 * solution_with_evidence.probability(Maintenance)(0))/100;
+        double v1 = floorf(100 * solution_with_evidence.probability(Maintenance)(1))/100;
+        double v2 = 1 - v0 - v1;
         cout << "Using the join tree algorithm:\n";
         mp_ui->mp_results->setPlainText(
-            QString::fromStdWString(L"Низької якості:      ") + QString::number(100 * solution_with_evidence.probability(Maintenance)(0)) + " %\n" +
-            QString::fromStdWString(L"Середньої якості: ") + QString::number(100 * solution_with_evidence.probability(Maintenance)(1)) + " %\n" +
-            QString::fromStdWString(L"Високої якості:      ") + QString::number(100 * solution_with_evidence.probability(Maintenance)(2)) + " %");
+            QString::fromStdWString(L"Низької якості:      ") + QString::number(100 * v0).left(4) + " %\n" +
+            QString::fromStdWString(L"Середньої якості: ") + QString::number(100 * v1).left(4) + " %\n" +
+            QString::fromStdWString(L"Високої якості:      ") + QString::number(100 * v2).left(4) + " %");
 
 
         // Note that when we made our solution_with_evidence object we reused our join_tree object.
@@ -991,7 +994,7 @@ void SQM_client::build_network()
             unsigned long D_count = 0;
 
             unsigned long
-            count_Maintenance_high,
+            count_Maintenance_high  = 0,
             count_Maintenance_middle,
             count_Maintenance_low;
 
@@ -1000,7 +1003,7 @@ void SQM_client::build_network()
 
             // The more times you let the loop run the more accurate the result will be.  Here we loop
             // 2000 times.
-            const long rounds = 20000;
+            const long rounds = 2000;
             for (long i = 0; i < rounds; ++i)
             {
             sampler.sample_graph(bn);
@@ -1014,8 +1017,8 @@ void SQM_client::build_network()
             cout << "p(Maintanence = high) = " << (double)count_Maintenance_high / (double)rounds << endl;
             //cout << "p(Maintanence = middle) = " << (double)count_Maintenance_middle / (double)rounds << endl;
             //cout << "p(Maintanence = low) = " << (double)count_Maintenance_low / (double)rounds << endl;
-
-            */
+          */
+            
         auto end = std::chrono::system_clock::now();
 
         cout << std::chrono::duration<double>(end - start).count() << endl;
