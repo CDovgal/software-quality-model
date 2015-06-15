@@ -39,7 +39,6 @@ SQM_client::SQM_client(QWidget* ip_parent)
             build_network();
         });
 
-
     connect(mp_ui->mp_button_activemq, &QAbstractButton::pressed, [&] ()
         {
             mp_ui->mp_dsqi->setValue(0.7);
@@ -51,6 +50,14 @@ SQM_client::SQM_client(QWidget* ip_parent)
             mp_ui->mp_LCOM4->setValue(0.7);
             build_network();
         });
+
+    connect(mp_ui->mp_use_lcom4,        &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_LCOM4->setEnabled(i_state); });
+    connect(mp_ui->mp_use_coupling,     &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_coupling->setEnabled(i_state); });
+    connect(mp_ui->mp_use_comment,      &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_comment_ratio->setEnabled(i_state); });
+    connect(mp_ui->mp_use_cyclomatic,   &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_cyclomatic->setEnabled(i_state); });
+    connect(mp_ui->mp_use_testcoverage, &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_code_coverage->setEnabled(i_state); });
+    connect(mp_ui->mp_use_module_size,  &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_average_size->setEnabled(i_state); });
+    connect(mp_ui->mp_use_dsqi,         &QCheckBox::stateChanged, [&](bool i_state) {mp_ui->mp_dsqi->setEnabled(i_state); });
     
 }
 
@@ -673,26 +680,50 @@ void SQM_client::build_network()
         // node really has a value of 1.  That is to say, we now have evidence that 
         // C is 1.  We can represent this in the network using the following two function
         // calls.
-        set_node_value(bn, I_DesignQuality, dsqi());
-        set_node_as_evidence(bn, I_DesignQuality);
 
-        set_node_value(bn, I_ModuleSize, average_module_size());
-        set_node_as_evidence(bn, I_ModuleSize);
+        if (mp_ui->mp_use_coupling->isChecked())
+        {
+            set_node_value(bn, I_Coupling, coupling());
+            set_node_as_evidence(bn, I_Coupling);
+        }
 
-        set_node_value(bn, I_CodeCoverage, code_coverage());
-        set_node_as_evidence(bn, I_CodeCoverage);
+        if (mp_ui->mp_use_comment->isChecked())
+        {
+            set_node_value(bn, I_CommentRatio, comment_ratio());
+            set_node_as_evidence(bn, I_CommentRatio);
+        }
 
-        set_node_value(bn, I_ImplementationAccuracy, cyclomatic_complexity());
-        set_node_as_evidence(bn, I_ImplementationAccuracy);
+        if (mp_ui->mp_use_cyclomatic->isChecked())
+        {
+            set_node_value(bn, I_ImplementationAccuracy, cyclomatic_complexity());
+            set_node_as_evidence(bn, I_ImplementationAccuracy);
+        }
 
-        set_node_value(bn, I_CommentRatio, comment_ratio());
-        set_node_as_evidence(bn, I_CommentRatio);
+        if (mp_ui->mp_use_testcoverage->isChecked())
+        {
+            set_node_value(bn, I_CodeCoverage, code_coverage());
+            set_node_as_evidence(bn, I_CodeCoverage);
+        }
 
-        set_node_value(bn, I_Cohesion, cohesion());
-        set_node_as_evidence(bn, I_Cohesion);
+        if (mp_ui->mp_use_module_size->isChecked())
+        {
+            set_node_value(bn, I_ModuleSize, average_module_size());
+            set_node_as_evidence(bn, I_ModuleSize);
+        }
 
-        set_node_value(bn, I_Coupling, coupling());
-        set_node_as_evidence(bn, I_Coupling);
+        if (mp_ui->mp_use_dsqi->isChecked())
+        {
+            set_node_value(bn, I_DesignQuality, dsqi());
+            set_node_as_evidence(bn, I_DesignQuality);
+        }
+
+        if (mp_ui->mp_use_lcom4->isChecked())
+        {
+            set_node_value(bn, I_Cohesion, cohesion());
+            set_node_as_evidence(bn, I_Cohesion);
+        }
+
+
 
         // Now we want to compute the probabilities of all the nodes in the network again
         // given that we now know that C is 1.  We can do this as follows:
