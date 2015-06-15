@@ -828,15 +828,15 @@ void SQM_client::build_network()
 
         // (2, 2, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
         set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
         // (2, 2, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
         set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
 
 
