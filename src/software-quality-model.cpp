@@ -294,9 +294,9 @@ void SQM_client::build_network()
         set_node_probability(bn, Implementation, 0, parent_state, 0.3);
 
         parent_state[Modification] = 0;
-        set_node_probability(bn, Implementation, 2, parent_state, 0.2);
+        set_node_probability(bn, Implementation, 2, parent_state, 0.3);
         set_node_probability(bn, Implementation, 1, parent_state, 0.3);
-        set_node_probability(bn, Implementation, 0, parent_state, 0.5);
+        set_node_probability(bn, Implementation, 0, parent_state, 0.4);
         /////////////////////////////////////////////////////
 
 
@@ -311,9 +311,9 @@ void SQM_client::build_network()
         parent_state.add(I_Coupling, 0);
 
         // (0,0,0)
-        set_node_probability(bn, Modification, 2, parent_state, 0.01);
+        set_node_probability(bn, Modification, 2, parent_state, 0.1);
         set_node_probability(bn, Modification, 1, parent_state, 0.1);
-        set_node_probability(bn, Modification, 0, parent_state, 0.89);
+        set_node_probability(bn, Modification, 0, parent_state, 0.8);
 
         // (0, 0, 1)
         parent_state[I_Coupling] = 1;
@@ -323,16 +323,16 @@ void SQM_client::build_network()
 
         // (0, 0, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.2);
-        set_node_probability(bn, Modification, 1, parent_state, 0.2);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.15);
+        set_node_probability(bn, Modification, 1, parent_state, 0.45);
+        set_node_probability(bn, Modification, 0, parent_state, 0.4);
 
         // (0, 1, 0)
         parent_state[I_Cohesion] = 1;
         parent_state[I_Coupling] = 0;
-        set_node_probability(bn, Modification, 2, parent_state, 0.1);
+        set_node_probability(bn, Modification, 2, parent_state, 0.2);
         set_node_probability(bn, Modification, 1, parent_state, 0.2);
-        set_node_probability(bn, Modification, 0, parent_state, 0.7);
+        set_node_probability(bn, Modification, 0, parent_state, 0.6);
 
         // (0, 1, 1)
         parent_state[I_Coupling] = 1;
@@ -342,36 +342,36 @@ void SQM_client::build_network()
 
         // (0, 1, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.2);
+        set_node_probability(bn, Modification, 1, parent_state, 0.3);
+        set_node_probability(bn, Modification, 0, parent_state, 0.5);
 
         // (0, 2, 0)
         parent_state[I_Cohesion] = 2;
         parent_state[I_Coupling] = 0;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
+        set_node_probability(bn, Modification, 2, parent_state, 0.25);
         set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 0, parent_state, 0.5);
 
         // (0, 2, 1)
         parent_state[I_Coupling] = 1;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.25);
+        set_node_probability(bn, Modification, 1, parent_state, 0.35);
+        set_node_probability(bn, Modification, 0, parent_state, 0.4);
 
         // (0, 2, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.25);
+        set_node_probability(bn, Modification, 1, parent_state, 0.55);
+        set_node_probability(bn, Modification, 0, parent_state, 0.2);
 
         // (1, 0, 0)
         parent_state[I_CommentRatio] = 1;
         parent_state[I_Cohesion] = 0;
         parent_state[I_Coupling] = 0;
         set_node_probability(bn, Modification, 2, parent_state, 0.1);
-        set_node_probability(bn, Modification, 1, parent_state, 0.3);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 1, parent_state, 0.2);
+        set_node_probability(bn, Modification, 0, parent_state, 0.7);
 
         // (1, 0, 1)
         parent_state[I_Coupling] = 1;
@@ -382,8 +382,8 @@ void SQM_client::build_network()
         // (1, 0, 2)
         parent_state[I_Coupling] = 2;
         set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 1, parent_state, 0.35);
+        set_node_probability(bn, Modification, 0, parent_state, 0.5);
 
         // (1, 1, 0)
         parent_state[I_Cohesion] = 1;
@@ -394,34 +394,34 @@ void SQM_client::build_network()
 
         // (1, 1, 1)
         parent_state[I_Coupling] = 1;
-        set_node_probability(bn, Modification, 2, parent_state, 0.2);
-        set_node_probability(bn, Modification, 1, parent_state, 0.5);
-        set_node_probability(bn, Modification, 0, parent_state, 0.3);
+        set_node_probability(bn, Modification, 2, parent_state, 0.25);
+        set_node_probability(bn, Modification, 1, parent_state, 0.35);
+        set_node_probability(bn, Modification, 0, parent_state, 0.4);
 
         // (1, 1, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.2);
-        set_node_probability(bn, Modification, 1, parent_state, 0.5);
+        set_node_probability(bn, Modification, 2, parent_state, 0.25);
+        set_node_probability(bn, Modification, 1, parent_state, 0.45);
         set_node_probability(bn, Modification, 0, parent_state, 0.3); 
 
         // (1, 2, 0)
         parent_state[I_Cohesion] = 2;
         parent_state[I_Coupling] = 0;
         set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 1, parent_state, 0.35);
+        set_node_probability(bn, Modification, 0, parent_state, 0.5);
 
         // (1, 2, 1)
         parent_state[I_Coupling] = 1;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
+        set_node_probability(bn, Modification, 2, parent_state, 0.35);
         set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 0, parent_state, 0.4);
 
         // (1, 2, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.45);
+        set_node_probability(bn, Modification, 1, parent_state, 0.45);
+        set_node_probability(bn, Modification, 0, parent_state, 0.1);
 
 
         // (2, 0, 0)
@@ -429,8 +429,8 @@ void SQM_client::build_network()
         parent_state[I_Cohesion] = 0;
         parent_state[I_Coupling] = 0;
         set_node_probability(bn, Modification, 2, parent_state, 0.2);
-        set_node_probability(bn, Modification, 1, parent_state, 0.3);
-        set_node_probability(bn, Modification, 0, parent_state, 0.5);
+        set_node_probability(bn, Modification, 1, parent_state, 0.2);
+        set_node_probability(bn, Modification, 0, parent_state, 0.6);
 
         // (2, 0, 1)
         parent_state[I_Coupling] = 1;
@@ -440,9 +440,9 @@ void SQM_client::build_network()
 
         // (2, 0, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
+        set_node_probability(bn, Modification, 2, parent_state, 0.2);
         set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 0, parent_state, 0.55);
 
         // (2, 1, 0)
         parent_state[I_Cohesion] = 1;
@@ -459,28 +459,28 @@ void SQM_client::build_network()
 
         // (2, 1, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.2);
+        set_node_probability(bn, Modification, 2, parent_state, 0.3);
         set_node_probability(bn, Modification, 1, parent_state, 0.5);
-        set_node_probability(bn, Modification, 0, parent_state, 0.3);
+        set_node_probability(bn, Modification, 0, parent_state, 0.2);
 
         // (2, 2, 0)
         parent_state[I_Cohesion] = 2;
         parent_state[I_Coupling] = 0;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.3);
+        set_node_probability(bn, Modification, 1, parent_state, 0.3);
+        set_node_probability(bn, Modification, 0, parent_state, 0.4);
 
         // (2, 2, 1)
         parent_state[I_Coupling] = 1;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.4);
+        set_node_probability(bn, Modification, 1, parent_state, 0.4);
+        set_node_probability(bn, Modification, 0, parent_state, 0.2);
 
         // (2, 2, 2)
         parent_state[I_Coupling] = 2;
-        set_node_probability(bn, Modification, 2, parent_state, 0.15);
-        set_node_probability(bn, Modification, 1, parent_state, 0.25);
-        set_node_probability(bn, Modification, 0, parent_state, 0.6);
+        set_node_probability(bn, Modification, 2, parent_state, 0.6);
+        set_node_probability(bn, Modification, 1, parent_state, 0.3);
+        set_node_probability(bn, Modification, 0, parent_state, 0.1);
 
 
 
@@ -627,8 +627,8 @@ void SQM_client::build_network()
 
         parent_state[Understanding] = 0;
         set_node_probability(bn, Analysis, 2, parent_state, 0.1);
-        set_node_probability(bn, Analysis, 1, parent_state, 0.3);
-        set_node_probability(bn, Analysis, 0, parent_state, 0.6);
+        set_node_probability(bn, Analysis, 1, parent_state, 0.4);
+        set_node_probability(bn, Analysis, 0, parent_state, 0.5);
         ////////////////////////////////
 
 
@@ -646,8 +646,8 @@ void SQM_client::build_network()
 
         parent_state[Testing] = 0;
         set_node_probability(bn, QA, 2, parent_state, 0.1);
-        set_node_probability(bn, QA, 1, parent_state, 0.2);
-        set_node_probability(bn, QA, 0, parent_state, 0.7);
+        set_node_probability(bn, QA, 1, parent_state, 0.3);
+        set_node_probability(bn, QA, 0, parent_state, 0.6);
         ////////////////////////////////
 
         ///      QA ==>  
@@ -661,59 +661,59 @@ void SQM_client::build_network()
         parent_state.add(Implementation, 0);
 
         // (0, 0, 0)
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.01);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.1);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.89);
 
         // (0, 0, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.7);
 
         // (0, 0, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
 
         // (0, 1, 0)
         parent_state[QA] = 1;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
 
         // (0, 1, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
 
         // (0, 1, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.4);
 
         // (0, 2, 0)
         parent_state[QA] = 2;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.4);
 
         // (0, 2, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.45);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
         // (0, 2, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
 
 
         ///////
@@ -722,59 +722,59 @@ void SQM_client::build_network()
         parent_state[Analysis] = 1;
         parent_state[QA] = 0;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
 
         // (1, 0, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
 
         // (1, 0, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.55);
 
         // (1, 1, 0)
         parent_state[QA] = 1;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
 
         // (1, 1, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.65);
 
         // (1, 1, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
 
         // (1, 2, 0)
         parent_state[QA] = 2;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.45);
 
         // (1, 2, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
 
         // (1, 2, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.6);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
 
 
 
@@ -784,244 +784,60 @@ void SQM_client::build_network()
         parent_state[Analysis] = 2;
         parent_state[QA] = 0;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.25);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
 
-        // (12, 0, 1)
+        // (2, 0, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.15);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.55);
 
         // (2, 0, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
         // (2, 1, 0)
         parent_state[QA] = 1;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.2);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
 
         // (2, 1, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
 
         // (2, 1, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
 
         // (2, 2, 0)
         parent_state[QA] = 2;
         parent_state[Implementation] = 0;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
         // (2, 2, 1)
         parent_state[Implementation] = 1;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
 
         // (2, 2, 2)
         parent_state[Implementation] = 2;
-        set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
+        set_node_probability(bn, Maintenance, 2, parent_state, 0.5);
+        set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
+        set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //// (2,2)
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.79);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.105);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.105);
-
-        //// (1,2)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.7);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.2);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
-
-        //// (0, 2)
-        //parent_state[Analysis] = 0;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
-
-        //// (0, 1)
-        //parent_state[QA] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
-
-        //// (0, 0)
-        //parent_state[QA] = 0;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
-
-        //// (1,0)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
-
-        //// (2,0)
-        //parent_state[Analysis] = 2;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
-
-        //// (2,1)
-        //parent_state[QA] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
-
-        //// (1,1)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
-
-
-
-
-        //parent_state[Implementation] = 1;
-        //parent_state[QA] = 2;
-        //parent_state[Analysis] = 2;
-        ////////////////++++++++++++
-        //// (2,2)
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.8);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
-
-        //// (1,2)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.6);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.05);
-
-        //// (0, 2)
-        //parent_state[Analysis] = 0;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.6);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
-
-        //// (0, 1)
-        //parent_state[QA] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
-
-        //// (0, 0)
-        //parent_state[QA] = 0;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
-
-        //// (1,0)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
-
-        //// (2,0)
-        //parent_state[Analysis] = 2;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
-
-        //// (2,1)
-        //parent_state[QA] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
-
-        //// (1,1)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
-
-
-
-        //parent_state[Implementation] = 0;
-        //parent_state[QA] = 2;
-        //parent_state[Analysis] = 2;
-        ////////////////++++++++++++
-        //// (2,2)
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.8);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
-
-        //// (1,2)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.6);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.35);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.05);
-
-        //// (0, 2)
-        //parent_state[Analysis] = 0;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.6);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
-
-        //// (0, 1)
-        //parent_state[QA] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
-
-        //// (0, 0)
-        //parent_state[QA] = 0;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.6);
-
-        //// (1,0)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.1);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.5);
-
-        //// (2,0)
-        //parent_state[Analysis] = 2;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.3);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.3);
-
-        //// (2,1)
-        //parent_state[QA] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.5);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.1);
-
-        //// (1,1)
-        //parent_state[Analysis] = 1;
-        //set_node_probability(bn, Maintenance, 2, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 1, parent_state, 0.4);
-        //set_node_probability(bn, Maintenance, 0, parent_state, 0.2);
 
 
         //////////////////++++++++++
